@@ -22,7 +22,7 @@ def get_data():
         if country['countryRegion'] == country_input:
             target_country = country
 
-    requested_data = {"Country": target_country['countryRegion'], "Cases": target_country["confirmed"], "Recovered": target_country["recovered"]}
+    requested_data = {"Country": target_country['countryRegion'], "Cases": target_country["confirmed"], "Recovered": target_country["recovered"], "Died": target_country["deaths"]}
 
     return flask.jsonify(requested_data)
 
