@@ -5,12 +5,9 @@ import json
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
-CORS(app)
-CORS(app, resources={r"/*": {"origins": "localhost"}})
 
 
 @app.route('/covidData', methods=('GET', 'POST'))
-# @cross_origin()
 def get_data():
     country_input = flask.request.args.get('country')
     date_input = flask.request.args.get('date')
