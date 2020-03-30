@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COVID19 API with JS</title>
+
+</head>
+
+<body>
+	
+<form id="myForm" onsubmit="return false;">	
+
+<h3>Choose the country:</h3>
+<select id='country'>
+	<option>Italy</option>
+	<option>Spain</option>
+	<option>Russia</option>
+</select>
+
+<h3>Enter the date:</h3>
+Date: <input type="text" id="day" size="5"> Month: <input type="text" id="month" size="5"> Year: <input type="text" id="year" size="5">
+<p><button id="submit">Submit</button></p>
+<!-- <p><button id="clear">Clear</button></p> -->
+</form>
+
+<br><br>
+
+
+<!-- <p id='result'></p> -->
+
+<script type="text/javascript">
+
+const submitBtn = document.getElementById("submit");
+
+
+const getData = () => {
+
+	let country=document.getElementById("country").value;
+	console.log(country);
+
+	let day = document.getElementById("day").value;
+	let month = document.getElementById("month").value;
+	let year = document.getElementById("year").value;
+
+	let date = month+"-"+day+"-"+year
+	console.log(date);
+
+	// const apiData = () => {
+		fetch("https://covid-19-2020-api.herokuapp.com/covidData?country=Italy&date=03-26-2020", {mode: 'cors'})
+		.then(response => {
+			console.log(response.json());
+		});
+
+	// };
+
+
+	}
+
+submitBtn.addEventListener('click', getData);
+
+// "https://covid-19-2020-api.herokuapp.com/covidData?country=Italy&date=03-26-2020"
+
+// document.getElementById('clear').onclick=clearForm;
+
+// function clearForm () {
+// 	document.getElementById('myForm').reset();
+
+
+</script>
+
+
+</body>
+
+
+
+</html>
