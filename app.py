@@ -2,8 +2,10 @@ import flask
 import datetime
 import requests
 import json
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app)
 
 
 @app.route('/covidData', methods=('GET', 'POST'))
