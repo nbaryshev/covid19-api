@@ -5,7 +5,7 @@ import json
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/covidData/*": {"origins": "*"}})
 
 
 @app.route('/covidData', methods=('GET', 'POST'))
