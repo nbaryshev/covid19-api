@@ -2,7 +2,6 @@ import flask
 import datetime
 import requests
 import json
-from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
 
