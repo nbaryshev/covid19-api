@@ -2,12 +2,15 @@ import flask
 import datetime
 import requests
 import json
+from flask import make_response
 
 app = flask.Flask(__name__)
 
+"Access-Control-Allow-Origin: *"
 
 @app.route('/covidData', methods=('GET', 'POST'))
 def get_data():
+
     country_input = flask.request.args.get('country')
     date_input = flask.request.args.get('date')
     date_split = date_input.split("-")
@@ -22,7 +25,10 @@ def get_data():
 
     requested_data = {"Country": target_country['countryRegion'], "Cases": target_country["confirmed"], "Recovered": target_country["recovered"], "Died": target_country["deaths"]}
 
-    return flask.jsonify(requested_data)
+    my_response = make_response(flask.jsonify(requested_data))
+    my_response.headers['Access-Control-Allow-Origin'] = "*"
+
+    return my_response
 
 
 if __name__ == '__main__':
