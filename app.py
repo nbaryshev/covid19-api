@@ -27,7 +27,7 @@ def get_data():
     my_response = make_response(requested_data)
     my_response.headers['Access-Control-Allow-Origin'] = "*"
 
-    return my_response
+    return flask.jsonify(my_response)
 
 
 if __name__ == '__main__':
