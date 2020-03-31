@@ -6,8 +6,6 @@ from flask import make_response
 
 app = flask.Flask(__name__)
 
-"Access-Control-Allow-Origin: *"
-
 @app.route('/covidData', methods=('GET', 'POST'))
 def get_data():
 
@@ -25,7 +23,7 @@ def get_data():
 
     requested_data = {"Country": target_country['countryRegion'], "Cases": target_country["confirmed"], "Recovered": target_country["recovered"], "Died": target_country["deaths"]}
 
-    my_response = make_response(flask.jsonify(requested_data))
+    my_response = flask.jsonify(make_response(requested_data))
     my_response.headers['Access-Control-Allow-Origin'] = "*"
 
     return my_response
