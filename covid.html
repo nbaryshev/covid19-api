@@ -19,13 +19,18 @@
 <h3>Enter the date:</h3>
 Date: <input type="text" id="day" size="5"> Month: <input type="text" id="month" size="5"> Year: <input type="text" id="year" size="5">
 <p><button id="submit">Submit</button></p>
-<!-- <p><button id="clear">Clear</button></p> -->
+
 </form>
 
 <br><br>
 
+<!-- Table placeholder -->
+<table id='myTable'>
+	
+</table>
 
-<!-- <p id='result'></p> -->
+
+<!-- JavaScript -->
 
 <script type="text/javascript">
 
@@ -34,42 +39,119 @@ const submitBtn = document.getElementById("submit");
 
 const getData = () => {
 
-	let country=document.getElementById("country").value;
-	console.log(country);
+	var target_country=document.getElementById("country").value;
+	console.log(target_country);
 
-	let day = document.getElementById("day").value;
-	let month = document.getElementById("month").value;
-	let year = document.getElementById("year").value;
+	var day = document.getElementById("day").value;
+	var month = document.getElementById("month").value;
+	var year = document.getElementById("year").value;
+	document.getElementById('myForm').reset();
 
-	let date = month+"-"+day+"-"+year
-	console.log(date);
+	var target_date = month+"-"+day+"-"+year
+	console.log(target_date);
 
-	// const apiData = () => {
-		fetch("https://covid-19-2020-api.herokuapp.com/covidData?country=Italy&date=03-26-2020", {mode: 'cors'})
-		.then(response => {
-			console.log(response.json());
-		});
+		// Creating elements for table
+	let createNode = (element1, element2) => {
+		// creating cells elements
+		console.log(element1, element2);
+		let cell1 = document.createElement('td');
+		let cell2 = document.createElement('td');
 
-	// };
+		// fulfilling cells with the data
+		let cell1Text = document.createTextNode(element1);
+		let cell2Text = document.createTextNode(element2);
 
+		// appending text to cells
+		cell1.appendChild(cell1Text);
+		cell2.appendChild(cell2Text);
 
+		appendCell(cell1, cell2);
 	}
 
-submitBtn.addEventListener('click', getData);
+	let appendCell = (cell1, cell2) => {
+		// creating row element
+		console.log("You reached appendCell function");
+		let row = document.createElement('tr');
 
-// "https://covid-19-2020-api.herokuapp.com/covidData?country=Italy&date=03-26-2020"
+		// appending cells to the row
+		row.appendChild(cell1);
+		row.appendChild(cell2);
 
-// document.getElementById('clear').onclick=clearForm;
+		console.log(row);
 
-// function clearForm () {
-// 	document.getElementById('myForm').reset();
+		// document.getElementById("myTable").innerHTML = row;
+
+		var table = document.getElementById("myTable");
+
+		table.appendChild(row);
+
+		// return row;
+	}
+
+
+	// Preapring URL with headers for request
+	var url = new URL('https://covid-19-2020-api.herokuapp.com/covidData');
+	var params = {country: target_country, date: target_date}
+
+	url.search = new URLSearchParams(params).toString();
+
+	// fetching the data from 'url'
+	fetch(url)
+	.then(response => {
+		return response.json();
+	})
+	.then(elements => {
+		// itearating through the JSON
+		// var table=[];
+		for (var key in elements) {
+
+			var value = elements[key];
+
+			// calling the function
+			createNode(key, value);
+
+			// let row = createNode(key, value);
+
+			// document.getElementById("myTable").innerHTML = row;
+
+			// table.push(row);
+
+									// var table = document.getElementById('myTable');
+									// let row = table.insertRow(-1);
+									// let cell1 = row.insertCell(0);
+									// let cell2 = row.insertCell(1);
+									// cell1.innerHTML = key;
+									// cell2.innerHTML = value;
+		}
+
+		
+
+	})
+
+	// .then(mytable => {
+	// 	for (newElement in mytable) {
+	// 		return newElement;
+	// 	}
+	// })
+
+
+
+
+};
+	// .then(responseData => {
+	// 	// console.log(responseData)
+	// 	// return responseData;
+
+	// 	document.getElementById('result').innerHTML = responseData;
+	// });
+
+	
+
+	submitBtn.addEventListener('click', getData);
 
 
 </script>
 
 
 </body>
-
-
-
 </html>
