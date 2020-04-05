@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>COVID19 API with JS</title>
-
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
@@ -79,15 +80,10 @@ const getData = () => {
 
 		console.log(row);
 
-		// document.getElementById("myTable").innerHTML = row;
-
 		var table = document.getElementById("myTable");
 
 		table.appendChild(row);
-
-		// return row;
 	}
-
 
 	// Preapring URL with headers for request
 	var url = new URL('https://covid-19-2020-api.herokuapp.com/covidData');
@@ -99,10 +95,10 @@ const getData = () => {
 	fetch(url)
 	.then(response => {
 		return response.json();
+
 	})
 	.then(elements => {
 		// itearating through the JSON
-		// var table=[];
 		for (var key in elements) {
 
 			var value = elements[key];
@@ -110,45 +106,11 @@ const getData = () => {
 			// calling the function
 			createNode(key, value);
 
-			// let row = createNode(key, value);
-
-			// document.getElementById("myTable").innerHTML = row;
-
-			// table.push(row);
-
-									// var table = document.getElementById('myTable');
-									// let row = table.insertRow(-1);
-									// let cell1 = row.insertCell(0);
-									// let cell2 = row.insertCell(1);
-									// cell1.innerHTML = key;
-									// cell2.innerHTML = value;
-		}
-
-		
-
+		}		
 	})
-
-	// .then(mytable => {
-	// 	for (newElement in mytable) {
-	// 		return newElement;
-	// 	}
-	// })
-
-
-
-
 };
-	// .then(responseData => {
-	// 	// console.log(responseData)
-	// 	// return responseData;
-
-	// 	document.getElementById('result').innerHTML = responseData;
-	// });
-
-	
 
 	submitBtn.addEventListener('click', getData);
-
 
 </script>
 
